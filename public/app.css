@@ -1,0 +1,7 @@
+h1 a, h1 a:hover {
+  color: inherit;
+}
+
+.page-header .pull-right {
+  margin-top: 25px;
+}

@@ -23,7 +23,7 @@ module GoSpotify::Controllers::Auth
       AuthRepository.persist(auth)
 
       session[:user_id] = user_id
-      redirect_to routes.path(:root)
+      redirect_to routes.path(:playlists)
     end
 
     def compute_auth(omniauth)

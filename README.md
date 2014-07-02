@@ -1,6 +1,6 @@
 # GoSpotify
 
-GoSpotify is a simple service that syncs your playlists from SoundCloud and VK to your Spotify.
+GoSpotify is a simple service that syncs your playlists from SoundCloud and VK to Spotify.
 
 ## Status
 

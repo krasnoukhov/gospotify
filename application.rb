@@ -32,6 +32,11 @@ module GoSpotify
         include Lotus::Action
         include Lotus::Action::Session
 
+        expose :env
+        def env
+          APP_ENV
+        end
+
         expose :routes
         def routes
           @routes ||= APP.routes
