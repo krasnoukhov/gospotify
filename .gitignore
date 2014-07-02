@@ -1,0 +1,5 @@
+.env
+bundle
+coverage
+log
+tmp

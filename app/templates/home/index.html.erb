@@ -1,0 +1,8 @@
+<% if user_signed_in %>
+  <p><%= current_user %></p>
+<% else %>
+<div class="jumbotron">
+  <p>GoSpotify is a simple service that syncs your playlists from SoundCloud and VK to your Spotify.</p>
+  <a href="/auth/spotify" class="btn btn-default btn-lg">Sign in with Spotify <i class="fa fa-spotify"></i></a>
+</div>
+<% end %>
