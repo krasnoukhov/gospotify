@@ -6,7 +6,27 @@ module GoSpotify::Controllers::Auth
 
     def call(params)
       omniauth = params.env["omniauth.auth"]
+      auth = compute_auth(omniauth)
 
+      # Do not allow users w/o email
+      if !auth.email && !(auth.user_id || user_signed_in)
+        redirect_to routes.path(:auth_failure, message: "email_required") and return
+      end
+
+      # Fuck coolhackers
+      if user_signed_in && auth.user_id && current_user.id != auth.user_id
+        redirect_to routes.path(:auth_failure, message: "auth_taken") and return
+      end
+
+      user_id = compute_user_id(auth)
+      auth.user_id ||= user_id
+      AuthRepository.persist(auth)
+
+      session[:user_id] = user_id
+      redirect_to routes.path(:root)
+    end
+
+    def compute_auth(omniauth)
       auth = AuthRepository.by_external(
         omniauth[:provider], omniauth[:uid].to_s
       ) || Auth.new(
@@ -20,17 +40,11 @@ module GoSpotify::Controllers::Auth
         auth.secret = omniauth[:credentials][:refresh_token]
       end
 
-      # Do not allow users w/o email
-      if !auth.email && !(auth.user_id || user_signed_in)
-        redirect_to routes.path(:auth_failure, message: "email_required") and return
-      end
+      auth
+    end
 
-      # Fuck coolhackers
-      if user_signed_in && auth.user_id && current_user.id != auth.user_id
-        redirect_to routes.path(:auth_failure, message: "auth_taken") and return
-      end
-
-      user_id = case
+    def compute_user_id(auth)
+      case
       when auth.user_id
         auth.user_id
       when user_signed_in
@@ -40,12 +54,6 @@ module GoSpotify::Controllers::Auth
         UserRepository.create(user)
         user.id
       end
-
-      auth.user_id ||= user_id
-      AuthRepository.persist(auth)
-
-      session[:user_id] = user_id
-      redirect_to routes.path(:root)
     end
   end
 
