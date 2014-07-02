@@ -15,6 +15,7 @@ end
 group :test do
   gem "minitest-capybara", "~> 0.7"
   gem "capybara-webkit", "~> 1.1"
+  gem "rack_session_access", "~> 0.1"
   gem "simplecov", "~> 0.8"
   gem "coveralls", "~> 0.7"
 end

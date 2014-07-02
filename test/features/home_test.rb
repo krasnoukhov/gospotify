@@ -2,6 +2,7 @@ require "test_helper"
 
 feature "Home" do
   before do
+    before_each
     visit "/"
   end
 

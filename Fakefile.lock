@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/krasnoukhov/fake_dynamo.git
-  revision: 171654edd11265beb9168a68e05b010aaaa569f0
+  revision: 5ab847d334048d6a1d19b11e4c73067fc4e40337
   specs:
     fake_dynamo (0.2.5)
       activesupport
