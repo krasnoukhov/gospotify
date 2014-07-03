@@ -51,6 +51,11 @@ module GoSpotify
           @user_signed_in = !!current_user if @user_signed_in.nil?
           @user_signed_in
         end
+
+        private
+        def authenticate!
+          halt 401 unless user_signed_in
+        end
       end
     end
 

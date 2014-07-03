@@ -1,11 +1,15 @@
 module GoSpotify::Controllers::Playlists
   include GoSpotify::Controller
 
-  class Index
+  class Show
     include GoSpotify::CommonAction
 
+    before :authenticate!
+    before { |params| @auth = current_user.auth_for(params[:id]) }
+    before { halt 401 unless @auth }
+
     def call(params)
-      redirect_to routes.path(:root) unless user_signed_in and return
+      self.body = JSON.dump(["omg"])
     end
   end
 end

@@ -9,7 +9,7 @@
 </head>
 <body>
   <div class="container">
-    <div class="page-header clearfix">
+    <div class="page-header">
       <div class="pull-left">
         <h1><a href="/">GoSpotify</a></h1>
       </div>
@@ -20,15 +20,29 @@
         <a href="/auth/signout" class="btn btn-default btn-sm">Sign out</a>
       </div>
       <% end %>
+
+      <div class="clearfix"></div>
+      <hr />
     </div>
 
     <%= yield %>
 
     <div class="page-footer">
+      <hr />
       <p>
         <a href="https://github.com/krasnoukhov/gospotify">Open source</a> project by <a href="http://krasnoukhov.com">Dmitry Krasnoukhov</a>
       </p>
     </div>
   </div>
+
+  <% if env == "production" %>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/react/0.10.0/react-with-addons.min.js"></script>
+  <% else %>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.11.1/jquery.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/react/0.10.0/JSXTransformer.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/react/0.10.0/react-with-addons.js"></script>
+  <script src="/app.jsx" type="text/jsx"></script>
+  <% end %>
 </body>
 </html>

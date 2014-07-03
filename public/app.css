@@ -2,6 +2,15 @@ h1 a, h1 a:hover {
   color: inherit;
 }
 
+.page-header {
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
 .page-header .pull-right {
   margin-top: 25px;
+}
+
+#app h2 {
+  margin-top: 0;
 }

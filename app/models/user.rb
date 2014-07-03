@@ -2,11 +2,7 @@ class User
   include Lotus::Entity
   self.attributes = :email
 
-  def soundcloud
-    AuthRepository.by_user_and_provider(id, "soundcloud")
-  end
-
-  def soundcloud?
-    !!soundcloud
+  def auth_for(provider)
+    AuthRepository.by_user_and_provider(id, provider)
   end
 end
