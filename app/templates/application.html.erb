@@ -16,7 +16,7 @@
 
       <% if user_signed_in %>
       <div class="pull-right">
-        <span class="text-muted"><%= current_user.email %></span>&nbsp;
+        <span class="text-muted"><%= current_user.username %></span>&nbsp;
         <a href="/auth/signout" class="btn btn-default btn-sm">Sign out</a>
       </div>
       <% end %>

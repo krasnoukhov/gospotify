@@ -16,14 +16,14 @@ feature "Auth" do
       end
 
       scenario "is logged in" do
-        page.must_have_content("john@smith.com")
+        page.must_have_content("john")
         AuthRepository.all.count.must_equal 1
         UserRepository.all.count.must_equal 1
       end
 
       scenario "with the same auth" do
         visit "/auth/spotify"
-        page.must_have_content("john@smith.com")
+        page.must_have_content("john")
         AuthRepository.all.count.must_equal 1
         UserRepository.all.count.must_equal 1
       end
@@ -75,7 +75,7 @@ feature "Auth" do
         visit "/auth/spotify"
         visit "/auth/soundcloud"
 
-        user = User.new(email: "noop@smith.com")
+        user = User.new(email: "noop", username: "noop")
         UserRepository.create(user)
         page.set_rack_session(user_id: user.id)
 

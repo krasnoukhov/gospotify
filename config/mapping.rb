@@ -5,6 +5,7 @@ mapper = Lotus::Model::Mapper.new(coercer) do
 
     attribute :id,          String
     attribute :email,       String
+    attribute :username,    String
   end
 
   collection :auths do

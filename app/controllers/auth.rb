@@ -50,7 +50,7 @@ module GoSpotify::Controllers::Auth
       when user_signed_in
         current_user.id
       else
-        user = User.new(email: auth.email)
+        user = User.new(email: auth.email, username: auth.external_id)
         UserRepository.create(user)
         user.id
       end

@@ -8,9 +8,13 @@ h1 a, h1 a:hover {
 }
 
 .page-header .pull-right {
-  margin-top: 25px;
+  margin-top: 30px;
 }
 
 #app h2 {
   margin-top: 0;
+}
+
+#app .provider {
+  margin-bottom: 20px;
 }
