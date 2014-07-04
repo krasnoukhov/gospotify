@@ -12,7 +12,8 @@ var App = React.createClass({
 
 var Provider = React.createClass({
   propTypes: {
-    name: React.PropTypes.string.isRequired
+    name: React.PropTypes.string.isRequired,
+    provider: React.PropTypes.string.isRequired,
   },
 
   getInitialState: function() {
@@ -85,9 +86,7 @@ var Playlist = React.createClass({
   },
 
   getInitialState: function() {
-    return {
-      status: this.props.playlist.status,
-    }
+    return this.props.playlist.status;
   },
 
   componentWillMount: function() {
@@ -111,7 +110,7 @@ var Playlist = React.createClass({
       method: "PATCH",
       success: function(data) {
         this.props.playlist = data;
-        this.setState({ status: data.status })
+        this.setState(data.status)
       }.bind(this),
       error: function(xhr, status, err) {
         this.setState({ status: "error" })
@@ -129,7 +128,7 @@ var Playlist = React.createClass({
       dataType: "json",
       success: function(data) {
         this.props.playlist = data;
-        this.setState({ status: data.status })
+        this.setState(data.status)
       }.bind(this),
       error: function(xhr, status, err) {
         this.setState({ status: "error" })
@@ -138,10 +137,14 @@ var Playlist = React.createClass({
   },
 
   render: function() {
-    var synced;
+    var status;
     if (!this.patchDisabled() && this.props.playlist.synced_at) {
-      synced = (
+      status = (
         <span className="text-muted">Last synced {moment(this.props.playlist.synced_at).fromNow()}</span>
+      )
+    } else if (this.state.total && this.state.at) {
+      status = (
+        <span className="text-success">Processing {this.state.at}/{this.state.total}</span>
       )
     }
 
@@ -151,7 +154,7 @@ var Playlist = React.createClass({
           <h4>{this.props.playlist.title}</h4>
         </td>
         <td className="controls">
-          {synced}
+          {status}
           <button className="btn btn-success btn-xs" disabled={this.patchDisabled()} onClick={this.requestPatch}>{this.status()}</button>
         </td>
       </tr>

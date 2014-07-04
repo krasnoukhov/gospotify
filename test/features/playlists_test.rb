@@ -1,11 +1,5 @@
 require "test_helper"
 
-class SoundcloudClient
-  def remote_playlists
-    [{ id: 12345, title: "Mixtapes" }]
-  end
-end
-
 feature "Playlists" do
   before do
     before_each
@@ -64,7 +58,7 @@ feature "Playlists" do
       scenario do
         @response["user_id"].must_equal @user.id
         @response["job_id"].length.must_equal 24
-        @response["status"].must_match /queued|working/
+        @response["status"]["status"].must_match /queued|working/
       end
     end
 

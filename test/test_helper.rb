@@ -21,7 +21,10 @@ end
 require "minitest/autorun"
 require "minitest/capybara"
 require "minitest/features"
+require "sidekiq/testing"
+
 require_relative "../config/applications"
+require_relative "mocks/soundcloud"
 
 def before_each
   AuthRepository.clear

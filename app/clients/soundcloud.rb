@@ -1,3 +1,5 @@
+require_relative "abstract"
+
 class SoundcloudClient < AbstractClient
   def initialize(*args)
     super
@@ -23,6 +25,10 @@ class SoundcloudClient < AbstractClient
     end
   end
 
+  def tracks(playlist)
+    remote_tracks(playlist.external_id)
+  end
+
   private
   def default_playlists
     [{ id: "favorites", title: "Favorites" }]
@@ -31,6 +37,25 @@ class SoundcloudClient < AbstractClient
   # :nocov: #
   def remote_playlists
     @api.get("/me/playlists")
+  end
+
+  def remote_tracks(id)
+    tracks = if id == "favorites"
+      @api.get("/me/favorites")
+    else
+      @api.get("/playlists/#{id}")[:tracks]
+    end
+
+    tracks.map do |track|
+      # ¯\_(ツ)_/¯
+      # artist, title = if track[:title].scan("-").count == 1
+      #   track.split("-")
+      # else
+      #   [track[:user][:username], track[:title]]
+      # end
+
+      [track[:title], "#{track[:user][:username]} #{track[:title]}"]
+    end
   end
   # :nocov: #
 end
