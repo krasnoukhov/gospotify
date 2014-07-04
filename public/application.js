@@ -1,16 +1,16 @@
 /** @jsx React.DOM */
-var App = React.createClass({
+var App = React.createClass({displayName: 'App',
   render: function() {
     return (
-      <div className="providers">
-        <Provider name="SoundCloud" provider="soundcloud" />
-        <Provider name="VK" provider="vkontakte" />
-      </div>
+      React.DOM.div( {className:"providers"}, 
+        Provider( {name:"SoundCloud", provider:"soundcloud"} ),
+        Provider( {name:"VK", provider:"vkontakte"} )
+      )
     );
   }
 });
 
-var Provider = React.createClass({
+var Provider = React.createClass({displayName: 'Provider',
   propTypes: {
     name: React.PropTypes.string.isRequired,
     provider: React.PropTypes.string.isRequired,
@@ -50,36 +50,36 @@ var Provider = React.createClass({
     var content;
 
     if (!this.state.loaded) {
-      content = <p className="text-muted">Loading...</p>;
+      content = React.DOM.p( {className:"text-muted"}, "Loading...");
     } else if (!this.state.authorized) {
       var href = "/auth/"+this.props.provider;
       content = (
-        <a href={href} className="btn btn-primary btn-sm">
-          Sign in with {this.props.name}
-        </a>
+        React.DOM.a( {href:href, className:"btn btn-primary btn-sm"}, 
+          "Sign in with ", this.props.name
+        )
       );
     } else if (this.state.playlists.length > 0) {
       content = (
-        <table className="table table-hover">
-          {this.state.playlists.map(function(playlist) {
-            return <Playlist key={playlist.external_id} provider={this.props.provider} playlist={playlist} />
-          }.bind(this))}
-        </table>
+        React.DOM.table( {className:"table table-hover"}, 
+          this.state.playlists.map(function(playlist) {
+            return Playlist( {key:playlist.external_id, provider:this.props.provider, playlist:playlist} )
+          }.bind(this))
+        )
       )
     } else {
-      content = <p className="text-danger">Request error</p>
+      content = React.DOM.p( {className:"text-danger"}, "Request error")
     }
 
     return (
-      <div className="provider">
-        <h2><i className={icon}></i>&nbsp; {this.props.name}</h2>
-        {content}
-      </div>
+      React.DOM.div( {className:"provider"}, 
+        React.DOM.h2(null, React.DOM.i( {className:icon}), " ", this.props.name),
+        content
+      )
     )
   }
 });
 
-var Playlist = React.createClass({
+var Playlist = React.createClass({displayName: 'Playlist',
   propTypes: {
     provider: React.PropTypes.string.isRequired,
     playlist: React.PropTypes.object.isRequired
@@ -140,29 +140,29 @@ var Playlist = React.createClass({
     var status;
     if (!this.patchDisabled() && this.props.playlist.synced_at) {
       status = (
-        <span className="text-muted">Last synced {moment(this.props.playlist.synced_at).fromNow()}</span>
+        React.DOM.span( {className:"text-muted"}, "Last synced ", moment(this.props.playlist.synced_at).fromNow())
       )
     } else if (this.state.total && this.state.at) {
       status = (
-        <span className="text-success">Processing {this.state.at}/{this.state.total}</span>
+        React.DOM.span( {className:"text-success"}, "Processing ", this.state.at,"/",this.state.total)
       )
     }
 
     return (
-      <tr>
-        <td>
-          <h4>{this.props.playlist.title}</h4>
-        </td>
-        <td className="controls">
-          {status}
-          <button className="btn btn-success btn-xs" disabled={this.patchDisabled()} onClick={this.requestPatch}>{this.status()}</button>
-        </td>
-      </tr>
+      React.DOM.tr(null, 
+        React.DOM.td(null, 
+          React.DOM.h4(null, this.props.playlist.title)
+        ),
+        React.DOM.td( {className:"controls"}, 
+          status,
+          React.DOM.button( {className:"btn btn-success btn-xs", disabled:this.patchDisabled(), onClick:this.requestPatch}, this.status())
+        )
+      )
     )
   }
 })
 
 var root = document.getElementById('app');
 if (root) {
-  React.renderComponent(<App />, root);
+  React.renderComponent(App(null ), root);
 }

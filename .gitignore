@@ -2,4 +2,5 @@
 bundle
 coverage
 log
+public/.module-cache
 tmp

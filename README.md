@@ -13,6 +13,7 @@ GoSpotify is a simple service that syncs your playlists from SoundCloud and VK t
 
 ### Setup
 
+* Ensure you have redis and react-tools installed
 * Clone example env: ```cp .env.example .env```
 * Edit ```.env``` and use it: ```source .env```
 * Install fake_dynamo dependencies: ```bundle --gemfile Fakefile```
