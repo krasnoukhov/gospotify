@@ -17,7 +17,7 @@ module GoSpotify::Controllers::Playlists
 
     def call(params)
       self.format = :json
-      self.body = Oj.dump(@auth.client.playlists.map(&:serializable_hash))
+      self.body = Oj.dump(@auth.client.playlists.map { |p| PlaylistPresenter.new(p).to_h })
     end
   end
 
@@ -30,7 +30,7 @@ module GoSpotify::Controllers::Playlists
       halt 401 unless playlist
 
       self.format = :json
-      self.body = Oj.dump(playlist.serializable_hash)
+      self.body = Oj.dump(PlaylistPresenter.new(playlist).to_h)
     end
   end
 
@@ -47,7 +47,7 @@ module GoSpotify::Controllers::Playlists
       PlaylistRepository.persist(playlist)
 
       self.format = :json
-      self.body = Oj.dump(playlist.serializable_hash)
+      self.body = Oj.dump(PlaylistPresenter.new(playlist).to_h)
     end
   end
 end

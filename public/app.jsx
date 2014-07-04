@@ -59,7 +59,7 @@ var Provider = React.createClass({
       );
     } else if (this.state.playlists.length > 0) {
       content = (
-        <table className="table">
+        <table className="table table-hover">
           {this.state.playlists.map(function(playlist) {
             return <Playlist key={playlist.external_id} provider={this.props.provider} playlist={playlist} />
           }.bind(this))}
@@ -92,6 +92,7 @@ var Playlist = React.createClass({
 
   componentWillMount: function() {
     setInterval(this.requestGet, 3*1000);
+    setInterval(this.forceUpdate.bind(this), 60*1000);
   },
 
   status: function() {
@@ -99,7 +100,7 @@ var Playlist = React.createClass({
   },
 
   patchDisabled: function() {
-    return this.status() == "sync" || this.status() == "failed" ? false : true
+    return this.status() == "sync" || this.status() == "error" ? false : true
   },
 
   requestPatch: function() {
@@ -109,10 +110,11 @@ var Playlist = React.createClass({
       dataType: "json",
       method: "PATCH",
       success: function(data) {
+        this.props.playlist = data;
         this.setState({ status: data.status })
       }.bind(this),
       error: function(xhr, status, err) {
-        this.setState({ status: "failed" })
+        this.setState({ status: "error" })
       }.bind(this)
     })
   },
@@ -126,21 +128,30 @@ var Playlist = React.createClass({
       url: "/provider/" + this.props.provider + "/playlists/" + this.props.playlist.external_id,
       dataType: "json",
       success: function(data) {
+        this.props.playlist = data;
         this.setState({ status: data.status })
       }.bind(this),
       error: function(xhr, status, err) {
-        this.setState({ status: "failed" })
+        this.setState({ status: "error" })
       }.bind(this)
     });
   },
 
   render: function() {
+    var synced;
+    if (!this.patchDisabled() && this.props.playlist.synced_at) {
+      synced = (
+        <span className="text-muted">Last synced {moment(this.props.playlist.synced_at).fromNow()}</span>
+      )
+    }
+
     return (
       <tr>
         <td>
           <h4>{this.props.playlist.title}</h4>
         </td>
         <td className="controls">
+          {synced}
           <button className="btn btn-success btn-xs" disabled={this.patchDisabled()} onClick={this.requestPatch}>{this.status()}</button>
         </td>
       </tr>

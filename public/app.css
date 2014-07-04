@@ -17,6 +17,7 @@ h1 a, h1 a:hover {
 
 #app h2 {
   margin-top: 0;
+  margin-bottom: 20px;
 }
 
 #app .provider {
@@ -28,9 +29,15 @@ h1 a, h1 a:hover {
 }
 
 #app table td.controls {
+  vertical-align: middle;
   text-align: right;
 }
 
+#app table td.controls span {
+  font-size: 90%;
+}
+
 #app table td.controls .btn {
+  margin-left: 10px;
   text-transform: capitalize;
 }
