@@ -38,12 +38,10 @@ feature "Playlists" do
     describe "can sync" do
       before do
         page.driver.submit :patch, "/provider/soundcloud/playlists/12345", {}
-
-        @response = Oj.load(page.body)
       end
 
       scenario "syncs" do
-        @response["status"].must_equal "ok"
+        page.body.must_equal '{"status":"ok"}'
       end
     end
   end
