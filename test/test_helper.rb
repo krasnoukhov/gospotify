@@ -21,9 +21,6 @@ end
 require "minitest/autorun"
 require "minitest/capybara"
 require "minitest/features"
-require "rack_session_access"
-require "rack_session_access/capybara"
-require "capybara/webkit"
 
 require "tilt/erb"
 require_relative "../application"
@@ -34,11 +31,12 @@ def before_each
 end
 
 Capybara.app = Rack::Builder.parse_file(File.expand_path("../../config.ru", __FILE__)).first
-Capybara.default_wait_time = 10
-Capybara.javascript_driver = :webkit
 
 OmniAuth.config.logger.level = Logger::FATAL
 OmniAuth.config.test_mode = true
+OmniAuth.config.on_failure = ->(env) {
+  OmniAuth::FailureEndpoint.new(env).redirect_to_failure
+}
 OmniAuth.config.add_mock(:spotify, {
   uid: "john",
   info: {

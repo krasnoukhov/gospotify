@@ -1,3 +1,7 @@
+.container {
+  max-width: 880px;
+}
+
 h1 a, h1 a:hover {
   color: inherit;
 }
@@ -17,4 +21,16 @@ h1 a, h1 a:hover {
 
 #app .provider {
   margin-bottom: 20px;
+}
+
+#app table {
+  margin-bottom: 0;
+}
+
+#app table td.controls {
+  text-align: right;
+}
+
+#app table td.controls .btn {
+  text-transform: capitalize;
 }

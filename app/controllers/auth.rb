@@ -5,8 +5,7 @@ module GoSpotify::Controllers::Auth
     include GoSpotify::CommonAction
 
     def call(params)
-      omniauth = params.env["omniauth.auth"]
-      auth = compute_auth(omniauth)
+      auth = compute_auth(params.env["omniauth.auth"])
 
       # Do not allow users w/o email
       if !auth.email && !(auth.user_id || user_signed_in)

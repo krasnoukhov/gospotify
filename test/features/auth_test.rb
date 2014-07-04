@@ -75,9 +75,11 @@ feature "Auth" do
         visit "/auth/spotify"
         visit "/auth/soundcloud"
 
-        user = User.new(email: "noop", username: "noop")
-        UserRepository.create(user)
-        page.set_rack_session(user_id: user.id)
+        AuthRepository.all.each do |auth|
+          AuthRepository.delete(auth)
+          auth.user_id = "noop"
+          AuthRepository.persist(auth)
+        end
 
         visit "/"
         visit "/auth/spotify"

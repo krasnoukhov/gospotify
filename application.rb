@@ -3,10 +3,14 @@ APP_ENV = ENV["RACK_ENV"] || "development"
 require "lotus"
 require "lotus/action/session"
 require "lotus-dynamodb"
+require "oj"
+require "sidekiq"
 
 require "omniauth-spotify"
 require "omniauth-soundcloud"
 require "omniauth-vkontakte"
+
+require "soundcloud"
 
 # :nocov:
 if APP_ENV == "production"

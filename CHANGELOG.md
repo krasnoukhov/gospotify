@@ -1,3 +1,8 @@
+2014-07-04
+----------
+
+* Implement SoundCloud playlists
+
 2014-07-03
 ----------
 
