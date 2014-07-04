@@ -19,8 +19,20 @@ mapper = Lotus::Model::Mapper.new(coercer) do
     attribute :token,       String
     attribute :secret,      String
   end
+
+  collection :playlists do
+    entity Playlist
+
+    attribute :id,          String
+    attribute :user_id,     String
+    attribute :provider,    String
+    attribute :external_id, String
+    attribute :title,       String
+    attribute :job_id,      String
+  end
 end.load!
 adapter = Lotus::Model::Adapters::DynamodbAdapter.new(mapper)
 
 AuthRepository.adapter = adapter
 UserRepository.adapter = adapter
+PlaylistRepository.adapter = adapter

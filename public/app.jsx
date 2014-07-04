@@ -86,18 +86,30 @@ var Playlist = React.createClass({
 
   getInitialState: function() {
     return {
-      status: "sync",
+      status: this.props.playlist.status,
     }
   },
 
-  handleSync: function() {
+  componentWillMount: function() {
+    setInterval(this.requestGet, 3*1000);
+  },
+
+  status: function() {
+    return this.state.status || "sync";
+  },
+
+  patchDisabled: function() {
+    return this.status() == "sync" || this.status() == "failed" ? false : true
+  },
+
+  requestPatch: function() {
     this.setState({ status: "loading..." })
     $.ajax({
       url: "/provider/" + this.props.provider + "/playlists/" + this.props.playlist.external_id,
       dataType: "json",
       method: "PATCH",
       success: function(data) {
-        this.setState({ status: "ok" })
+        this.setState({ status: data.status })
       }.bind(this),
       error: function(xhr, status, err) {
         this.setState({ status: "failed" })
@@ -105,15 +117,31 @@ var Playlist = React.createClass({
     })
   },
 
+  requestGet: function() {
+    if (this.status() == "sync") {
+      return;
+    }
+
+    $.ajax({
+      url: "/provider/" + this.props.provider + "/playlists/" + this.props.playlist.external_id,
+      dataType: "json",
+      success: function(data) {
+        this.setState({ status: data.status })
+      }.bind(this),
+      error: function(xhr, status, err) {
+        this.setState({ status: "failed" })
+      }.bind(this)
+    });
+  },
+
   render: function() {
-    var disabled = this.state.status == "sync" || this.state.status == "failed" ? false : true
     return (
       <tr>
         <td>
           <h4>{this.props.playlist.title}</h4>
         </td>
         <td className="controls">
-          <button className="btn btn-success btn-xs" disabled={disabled} onClick={this.handleSync}>{this.state.status}</button>
+          <button className="btn btn-success btn-xs" disabled={this.patchDisabled()} onClick={this.requestPatch}>{this.status()}</button>
         </td>
       </tr>
     )

@@ -66,5 +66,33 @@ namespace :db do
         write_capacity_units: 10,
       },
     )
+
+    DB.create_table(
+      table_name: "playlists",
+      attribute_definitions: [
+        { attribute_name: "id",           attribute_type: "S" },
+        { attribute_name: "user_id",      attribute_type: "S" },
+      ],
+      key_schema: [
+        { attribute_name: "id",           key_type: "HASH" },
+      ],
+      global_secondary_indexes: [{
+        index_name: "by_user",
+        key_schema: [
+          { attribute_name: "user_id",    key_type: "HASH" },
+        ],
+        projection: {
+          projection_type: "ALL",
+        },
+        provisioned_throughput: {
+          read_capacity_units: 10,
+          write_capacity_units: 10,
+        },
+      }],
+      provisioned_throughput: {
+        read_capacity_units: 10,
+        write_capacity_units: 10,
+      },
+    )
   end
 end

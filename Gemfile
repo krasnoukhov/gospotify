@@ -1,12 +1,11 @@
 source "https://rubygems.org"
 
 gem "lotusrb", github: "lotus/lotus"
-gem "lotus-dynamodb", "~> 0.1"
+gem "lotus-dynamodb", github: "krasnoukhov/lotus-dynamodb"
 gem "rake", "~> 10.3"
 gem "oj", "~> 2.9"
 gem "sidekiq", "~> 3.1"
-# gem "sidekiq-spy"
-# gem "sidekiq-status"
+gem "sidekiq-status", github: "krasnoukhov/sidekiq-status"
 
 gem "omniauth-spotify", "~> 0.0.1"
 gem "omniauth-soundcloud", "~> 1.0"

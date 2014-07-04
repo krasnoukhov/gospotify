@@ -1,9 +1,11 @@
 language: ruby
+rvm:
+  - 2.1.2
+services:
+  - redis
 before_script:
   - source .env.example
   - BUNDLE_GEMFILE=Fakefile bundle
   - BUNDLE_GEMFILE=Fakefile bundle exec fake_dynamo -d tmp/fake.db -P tmp/fake.pid -D
 script: 'bundle exec rake'
 after_script: 'kill `cat tmp/fake.pid`'
-rvm:
-  - 2.1.2

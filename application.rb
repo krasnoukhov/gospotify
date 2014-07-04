@@ -1,10 +1,13 @@
 APP_ENV = ENV["RACK_ENV"] || "development"
 
+require "bundler/setup"
+require "tilt/erb"
 require "lotus"
 require "lotus/action/session"
 require "lotus-dynamodb"
 require "oj"
 require "sidekiq"
+require "sidekiq-status"
 
 require "omniauth-spotify"
 require "omniauth-soundcloud"
@@ -80,3 +83,4 @@ APP = GoSpotify::Application.new
 LOGGER = Logger.new("log/#{APP_ENV}.log")
 
 require_relative "config/mapping"
+require_relative "config/sidekiq"

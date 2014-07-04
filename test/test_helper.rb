@@ -21,13 +21,12 @@ end
 require "minitest/autorun"
 require "minitest/capybara"
 require "minitest/features"
-
-require "tilt/erb"
 require_relative "../application"
 
 def before_each
   AuthRepository.clear
   UserRepository.clear
+  Sidekiq.redis { |c| c.flushdb }
 end
 
 Capybara.app = Rack::Builder.parse_file(File.expand_path("../../config.ru", __FILE__)).first

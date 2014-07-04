@@ -20,28 +20,45 @@ feature "Playlists" do
 
   describe "soundcloud" do
     before do
-      visit "/provider/soundcloud/playlists"
-
       @user = UserRepository.all.first
-      @response = Oj.load(page.body)
     end
 
-    scenario "has playlists" do
-      @response.size.must_equal 2
-      @response.map(&:class).uniq.must_equal [Playlist]
-      @response.map(&:user_id).uniq.must_equal [@user.id]
-      @response.map(&:provider).uniq.must_equal ["soundcloud"]
-      @response.first.external_id.must_equal "favorites"
-      @response.last.title.must_equal "Mixtapes"
-    end
-
-    describe "can sync" do
+    describe "index" do
       before do
-        page.driver.submit :patch, "/provider/soundcloud/playlists/12345", {}
+        visit "/provider/soundcloud/playlists"
+        @response = Oj.load(page.body)
       end
 
-      scenario "syncs" do
-        page.body.must_equal '{"status":"ok"}'
+      scenario do
+        @response.size.must_equal 2
+        @response.map { |x| x["user_id"] }.uniq.must_equal [@user.id]
+        @response.map { |x| x["provider"] }.uniq.must_equal ["soundcloud"]
+        @response.first["external_id"].must_equal "favorites"
+        @response.last["title"].must_equal "Mixtapes"
+      end
+    end
+
+    describe "update" do
+      before do
+        page.driver.submit :patch, "/provider/soundcloud/playlists/12345", {}
+        @response = Oj.load(page.body)
+      end
+
+      scenario do
+        @response["user_id"].must_equal @user.id
+        @response["job_id"].length.must_equal 24
+        @response["status"].must_equal "queued"
+      end
+    end
+
+    describe "show" do
+      before do
+        visit "/provider/soundcloud/playlists/12345"
+        @response = Oj.load(page.body)
+      end
+
+      scenario do
+        @response["user_id"].must_equal @user.id
       end
     end
   end

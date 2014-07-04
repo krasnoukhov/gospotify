@@ -4,5 +4,5 @@ get "/auth/failure",             to: "auth#failure",  as: :auth_failure
 get "/auth/signout",             to: "auth#signout",  as: :auth_signout
 
 namespace "/provider/:provider" do
-  resources :playlists,          only: [:index, :update]
+  resources :playlists,          only: [:index, :show, :update]
 end

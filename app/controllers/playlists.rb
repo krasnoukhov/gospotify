@@ -17,7 +17,20 @@ module GoSpotify::Controllers::Playlists
 
     def call(params)
       self.format = :json
-      self.body = Oj.dump(@auth.client.playlists)
+      self.body = Oj.dump(@auth.client.playlists.map(&:serializable_hash))
+    end
+  end
+
+  class Show
+    include GoSpotify::CommonAction
+    include CommonAction
+
+    def call(params)
+      playlist = @auth.client.playlists.find { |x| x.external_id == params[:id] }
+      halt 401 unless playlist
+
+      self.format = :json
+      self.body = Oj.dump(playlist.serializable_hash)
     end
   end
 
@@ -25,12 +38,16 @@ module GoSpotify::Controllers::Playlists
     include GoSpotify::CommonAction
     include CommonAction
 
-    expose :playlists
     def call(params)
-      Syncer.perform_async(current_user.id, params[:provider], params[:id])
+      playlist = @auth.client.playlists.find { |x| x.external_id == params[:id] }
+      halt 401 unless playlist
+
+      PlaylistRepository.persist(playlist)
+      playlist.job_id = Syncer.perform_async(playlist.id)
+      PlaylistRepository.persist(playlist)
 
       self.format = :json
-      self.body = Oj.dump("status" => "ok")
+      self.body = Oj.dump(playlist.serializable_hash)
     end
   end
 end
