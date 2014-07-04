@@ -24,17 +24,34 @@ feature "Playlists" do
     end
 
     describe "index" do
-      before do
-        visit "/provider/soundcloud/playlists"
-        @response = Oj.load(page.body)
+      describe "remote" do
+        before do
+          visit "/provider/soundcloud/playlists"
+          @response = Oj.load(page.body)
+        end
+
+        scenario do
+          @response.size.must_equal 2
+          @response.map { |x| x["id"] }.uniq.must_equal [nil]
+          @response.map { |x| x["user_id"] }.uniq.must_equal [@user.id]
+          @response.map { |x| x["provider"] }.uniq.must_equal ["soundcloud"]
+          @response.first["external_id"].must_equal "favorites"
+          @response.last["title"].must_equal "Mixtapes"
+        end
       end
 
-      scenario do
-        @response.size.must_equal 2
-        @response.map { |x| x["user_id"] }.uniq.must_equal [@user.id]
-        @response.map { |x| x["provider"] }.uniq.must_equal ["soundcloud"]
-        @response.first["external_id"].must_equal "favorites"
-        @response.last["title"].must_equal "Mixtapes"
+      describe "local" do
+        before do
+          page.driver.submit :patch, "/provider/soundcloud/playlists/12345", {}
+          visit "/provider/soundcloud/playlists"
+          @response = Oj.load(page.body)
+        end
+
+        scenario do
+          @response.size.must_equal 2
+          @response.first["id"].must_be_nil
+          @response.last["id"].wont_be_nil
+        end
       end
     end
 

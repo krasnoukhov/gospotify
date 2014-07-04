@@ -4,6 +4,6 @@ class Playlist
 
   def status
     return unless job_id
-    Sidekiq::Status::status(job_id).to_s
+    Sidekiq::Status.status(job_id).to_s
   end
 end
