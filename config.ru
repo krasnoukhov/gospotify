@@ -1,4 +1,4 @@
-require_relative "application"
+require_relative "config/applications"
 
 use Rack::Session::Cookie, secret: ENV["SECRET"]
 use OmniAuth::Builder do

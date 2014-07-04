@@ -47,7 +47,7 @@ feature "Playlists" do
       scenario do
         @response["user_id"].must_equal @user.id
         @response["job_id"].length.must_equal 24
-        @response["status"].must_equal "queued"
+        @response["status"].must_match /queued|working/
       end
     end
 

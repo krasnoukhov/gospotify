@@ -21,7 +21,7 @@ end
 require "minitest/autorun"
 require "minitest/capybara"
 require "minitest/features"
-require_relative "../application"
+require_relative "../config/applications"
 
 def before_each
   AuthRepository.clear

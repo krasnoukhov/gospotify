@@ -1,13 +1,4 @@
 GIT
-  remote: git://github.com/krasnoukhov/lotus-dynamodb.git
-  revision: 9a3db3e82b865800011e56a34aaf3ecfa7f20061
-  specs:
-    lotus-dynamodb (0.1.1)
-      aws-sdk (~> 1.0)
-      lotus-model (~> 0.1, >= 0.1.1)
-      multi_json (~> 1.10)
-
-GIT
   remote: git://github.com/krasnoukhov/sidekiq-status.git
   revision: 10c70c27a9b84d59577ecbee69ad9aadb306d2a9
   specs:
@@ -16,7 +7,7 @@ GIT
 
 GIT
   remote: git://github.com/lotus/lotus.git
-  revision: 98d7436ec912b3147a3e7e73292a07f8e508f762
+  revision: 19cd0784901cd5a831013a39a7541c9e0b1c89a7
   specs:
     lotusrb (0.1.0)
       lotus-controller (~> 0.2)
@@ -65,6 +56,10 @@ GEM
     lotus-controller (0.2.0)
       lotus-utils (~> 0.2)
       rack (~> 1.5)
+    lotus-dynamodb (0.1.2)
+      aws-sdk (~> 1.0)
+      lotus-model (~> 0.1, >= 0.1.1)
+      multi_json (~> 1.10)
     lotus-model (0.1.2)
       lotus-utils (~> 0.2)
       sequel (~> 4.9)
@@ -152,7 +147,7 @@ PLATFORMS
 
 DEPENDENCIES
   coveralls (~> 0.7)
-  lotus-dynamodb!
+  lotus-dynamodb (~> 0.1)
   lotusrb!
   minitest-capybara (~> 0.7)
   oj (~> 2.9)

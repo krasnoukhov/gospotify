@@ -1,7 +1,7 @@
 source "https://rubygems.org"
 
 gem "lotusrb", github: "lotus/lotus"
-gem "lotus-dynamodb", github: "krasnoukhov/lotus-dynamodb"
+gem "lotus-dynamodb", "~> 0.1"
 gem "rake", "~> 10.3"
 gem "oj", "~> 2.9"
 gem "sidekiq", "~> 3.1"

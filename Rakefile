@@ -10,7 +10,7 @@ end
 
 desc "Configure environment"
 task :environment do
-  require_relative "application"
+  require_relative "config/applications"
 end
 
 namespace :test do

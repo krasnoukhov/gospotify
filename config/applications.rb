@@ -82,5 +82,5 @@ end
 APP = GoSpotify::Application.new
 LOGGER = Logger.new("log/#{APP_ENV}.log")
 
-require_relative "config/mapping"
-require_relative "config/sidekiq"
+require_relative "mapping"
+require_relative "sidekiq"
