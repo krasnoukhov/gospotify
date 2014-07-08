@@ -1,4 +1,4 @@
-APP_ENV = ENV["RACK_ENV"] || "development"
+APP_ENV = ENV["LOTUS_ENV"] || "development"
 
 require "bundler/setup"
 require "tilt/erb"
@@ -14,23 +14,6 @@ require "omniauth-soundcloud"
 require "omniauth-vkontakte"
 
 require "soundcloud"
-
-# :nocov:
-if APP_ENV == "production"
-  AWS.config(
-    access_key_id: ENV["AWS_KEY"],
-    secret_access_key: ENV["AWS_SECRET"],
-  )
-else
-  AWS.config(
-    use_ssl: false,
-    dynamo_db_endpoint: "localhost",
-    dynamo_db_port: 4567,
-    access_key_id: "",
-    secret_access_key: "",
-  )
-end
-# :nocov:
 
 module GoSpotify
   module CommonAction
@@ -76,6 +59,29 @@ module GoSpotify
       load_paths << "app"
       routes "config/routes"
     end
+
+    # :nocov:
+    configure(:test) { GoSpotify::Application.local_dynamo }
+    configure(:development) { GoSpotify::Application.local_dynamo }
+    configure(:production) { GoSpotify::Application.remote_dynamo }
+
+    def self.local_dynamo
+      AWS.config(
+        use_ssl: false,
+        dynamo_db_endpoint: "localhost",
+        dynamo_db_port: 4567,
+        access_key_id: "",
+        secret_access_key: "",
+      )
+    end
+
+    def self.remote_dynamo
+      AWS.config(
+        access_key_id: ENV["AWS_KEY"],
+        secret_access_key: ENV["AWS_SECRET"],
+      )
+    end
+    # :nocov:
   end
 end
 

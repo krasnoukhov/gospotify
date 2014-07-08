@@ -4,7 +4,7 @@ gem "lotusrb", github: "lotus/lotus"
 gem "lotus-dynamodb", "~> 0.1"
 gem "rake", "~> 10.3"
 gem "oj", "~> 2.9"
-gem "sidekiq", "~> 3.1"
+gem "sidekiq", "~> 3.2"
 gem "sidekiq-status", github: "krasnoukhov/sidekiq-status"
 
 gem "omniauth-spotify", "~> 0.0.1"
