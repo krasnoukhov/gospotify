@@ -5,6 +5,10 @@ class SpotifyClient
   end
 
   # :nocov: #
+  def me
+    @api.me
+  end
+
   def ensure_playlist(playlist)
     # existing = @api.user_playlists(@auth.external_id)["items"].find do |x|
     #   x["name"] == playlist.spotify_title

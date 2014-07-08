@@ -1,4 +1,7 @@
 class SpotifyClient
+  def me
+  end
+
   def ensure_playlist(playlist)
     { "id" => "OMG"}
   end
