@@ -1,4 +1,4 @@
-class SoundcloudClient
+class VkontakteClient
   def remote_playlists
     [{ id: 12345, title: "Mixtapes" }]
   end

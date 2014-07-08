@@ -24,8 +24,7 @@ require "minitest/features"
 require "sidekiq/testing"
 
 require_relative "../config/applications"
-require_relative "mocks/soundcloud"
-require_relative "mocks/spotify"
+Dir["test/mocks/*.rb"].each { |f| require "./#{f}" }
 
 def before_each
   AuthRepository.clear
@@ -50,11 +49,13 @@ OmniAuth.config.add_mock(:spotify, {
     refresh_token: "XXX",
   },
 })
-OmniAuth.config.add_mock(:soundcloud, {
-  uid: 12345,
-  info: {
-  },
-  credentials: {
-    token: "XXX",
-  },
-})
+GoSpotify::Application::PROVIDERS.each do |provider|
+  OmniAuth.config.add_mock(provider, {
+    uid: 12345,
+    info: {
+    },
+    credentials: {
+      token: "XXX",
+    },
+  })
+end

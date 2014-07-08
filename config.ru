@@ -6,6 +6,9 @@ use OmniAuth::Builder do
     scope: "playlist-modify playlist-modify-private playlist-read-private user-read-email"
   }
   provider :soundcloud, ENV["SOUNDCLOUD_KEY"], ENV["SOUNDCLOUD_SECRET"]
+  provider :vkontakte, ENV["VK_KEY"], ENV["VK_SECRET"], {
+    scope: "audio"
+  }
 end
 
 run APP

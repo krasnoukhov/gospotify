@@ -29,15 +29,17 @@ feature "Auth" do
       end
     end
 
-    describe "soundcloud" do
-      before do
-        visit "/auth/spotify"
-        visit "/auth/soundcloud"
-      end
+    GoSpotify::Application::PROVIDERS.each do |provider|
+      describe provider do
+        before do
+          visit "/auth/spotify"
+          visit "/auth/#{provider}"
+        end
 
-      scenario "is logged in" do
-        AuthRepository.all.count.must_equal 2
-        UserRepository.all.count.must_equal 1
+        scenario "is logged in" do
+          AuthRepository.all.count.must_equal 2
+          UserRepository.all.count.must_equal 1
+        end
       end
     end
   end

@@ -1,37 +1,36 @@
 require_relative "abstract"
 
-class SoundcloudClient < AbstractClient
+class VkontakteClient < AbstractClient
   def initialize(*args)
     super
 
-    @api = SoundCloud.new(access_token: @auth.token)
+    @api = VkontakteApi::Client.new(@auth.token)
   end
 
   private
   def default_playlists
     [
       { id: "profile", title: "Tracks" },
-      { id: "favorites", title: "Likes" }
     ]
   end
 
   # :nocov: #
   def remote_playlists
-    @api.get("/me/playlists")
+    @api.audio.get_albums[1..-1].map do |x|
+      { id: x[:album_id].to_s, title: x[:title] }
+    end
   end
 
   def remote_tracks(id)
     tracks = if id == "profile"
-      @api.get("/me/tracks")
-    elsif id == "favorites"
-      @api.get("/me/favorites")
+      @api.audio.get
     else
-      @api.get("/playlists/#{id}")[:tracks]
+      @api.audio.get(album_id: id)
     end
 
     tracks.map do |track|
       Track.new(
-        artist_title: track[:user][:username],
+        artist_title: track[:artist],
         title: track[:title],
       )
     end

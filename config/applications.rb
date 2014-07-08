@@ -15,6 +15,7 @@ require "omniauth-vkontakte"
 
 require "spotify-client"
 require "soundcloud"
+require "vkontakte_api"
 
 module GoSpotify
   module CommonAction
@@ -55,6 +56,8 @@ module GoSpotify
   end
 
   class Application < Lotus::Application
+    PROVIDERS = [:soundcloud, :vkontakte]
+
     configure do
       layout :application
       load_paths << "app"

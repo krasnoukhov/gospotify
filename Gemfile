@@ -13,6 +13,7 @@ gem "omniauth-vkontakte", "~> 1.3"
 
 gem "spotify-client", "~> 0.0.1"
 gem "soundcloud", "~> 0.3"
+gem "vkontakte_api", "~> 1.4"
 
 group :development do
   gem "powify", "~> 0.9"

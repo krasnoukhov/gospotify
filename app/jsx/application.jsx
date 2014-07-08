@@ -90,7 +90,7 @@ var Playlist = React.createClass({
   },
 
   componentWillMount: function() {
-    setInterval(this.requestGet, 3*1000);
+    setInterval(this.requestGet, (3+Math.floor(Math.random()*5))*1000);
     setInterval(this.forceUpdate.bind(this), 60*1000);
   },
 
@@ -119,7 +119,7 @@ var Playlist = React.createClass({
   },
 
   requestGet: function() {
-    if (this.status() == "sync") {
+    if (this.status() == "sync" || $.active == 1) {
       return;
     }
 
