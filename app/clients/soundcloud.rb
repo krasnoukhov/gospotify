@@ -31,7 +31,10 @@ class SoundcloudClient < AbstractClient
 
   private
   def default_playlists
-    [{ id: "favorites", title: "Favorites" }]
+    [
+      { id: "profile", title: "Tracks" },
+      { id: "favorites", title: "Likes" }
+    ]
   end
 
   # :nocov: #
@@ -40,21 +43,19 @@ class SoundcloudClient < AbstractClient
   end
 
   def remote_tracks(id)
-    tracks = if id == "favorites"
+    tracks = if id == "profile"
+      @api.get("/me/tracks")
+    elsif id == "favorites"
       @api.get("/me/favorites")
     else
       @api.get("/playlists/#{id}")[:tracks]
     end
 
     tracks.map do |track|
-      # ¯\_(ツ)_/¯
-      # artist, title = if track[:title].scan("-").count == 1
-      #   track.split("-")
-      # else
-      #   [track[:user][:username], track[:title]]
-      # end
-
-      [track[:title], "#{track[:user][:username]} #{track[:title]}"]
+      Track.new(
+        artist_title: track[:user][:username],
+        title: track[:title],
+      )
     end
   end
   # :nocov: #

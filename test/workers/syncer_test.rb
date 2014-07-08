@@ -26,17 +26,16 @@ describe Syncer do
     )
     AuthRepository.create(soundcloud_auth)
 
-    playlist = Playlist.new(
+    @playlist = Playlist.new(
       user_id: user.id,
       provider: "soundcloud",
       external_id: SoundcloudClient.new(soundcloud_auth).remote_playlists.first[:id],
       title: SoundcloudClient.new(soundcloud_auth).remote_playlists.first[:title],
     )
-    PlaylistRepository.create(playlist)
-
-    Syncer.new.perform(playlist.id)
+    PlaylistRepository.create(@playlist)
   end
 
   it "performs" do
+    Syncer.new.perform(@playlist.id)
   end
 end

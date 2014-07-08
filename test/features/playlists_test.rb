@@ -25,11 +25,11 @@ feature "Playlists" do
         end
 
         scenario do
-          @response.size.must_equal 2
+          @response.size.must_equal 3
           @response.map { |x| x["id"] }.uniq.must_equal [nil]
           @response.map { |x| x["user_id"] }.uniq.must_equal [@user.id]
           @response.map { |x| x["provider"] }.uniq.must_equal ["soundcloud"]
-          @response.first["external_id"].must_equal "favorites"
+          @response.first["external_id"].must_equal "profile"
           @response.last["title"].must_equal "Mixtapes"
         end
       end
@@ -42,7 +42,7 @@ feature "Playlists" do
         end
 
         scenario do
-          @response.size.must_equal 2
+          @response.size.must_equal 3
           @response.first["id"].must_be_nil
           @response.last["id"].wont_be_nil
         end

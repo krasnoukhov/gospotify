@@ -4,8 +4,6 @@ class SoundcloudClient
   end
 
   def remote_tracks(id)
-    [
-      ["omg", "omg – wow"]
-    ]
+    [Track.new(artist_title: "omg", title: "omg – wow")]
   end
 end

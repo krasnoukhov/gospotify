@@ -27,6 +27,7 @@ mapper = Lotus::Model::Mapper.new(coercer) do
     attribute :user_id,        String
     attribute :provider,       String
     attribute :external_id,    String
+    attribute :spotify_id,    String
     attribute :title,          String
     attribute :job_id,         String
     attribute :synced_at,      Time

@@ -25,6 +25,7 @@ require "sidekiq/testing"
 
 require_relative "../config/applications"
 require_relative "mocks/soundcloud"
+require_relative "mocks/spotify"
 
 def before_each
   AuthRepository.clear

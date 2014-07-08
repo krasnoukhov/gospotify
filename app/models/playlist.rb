@@ -1,6 +1,11 @@
 class Playlist
   include Lotus::Entity
-  self.attributes = :user_id, :provider, :external_id, :title, :job_id, :synced_at
+  self.attributes = :user_id, :provider, :external_id, :spotify_id,
+                    :title, :job_id, :synced_at
+
+  def user
+    UserRepository.find(user_id)
+  end
 
   def auth
     AuthRepository.by_user_and_provider(user_id, provider)
@@ -16,5 +21,9 @@ class Playlist
     } unless job_id
 
     Sidekiq::Status::get_all(job_id).map { |k, v| [k.to_s, v] }.to_h
+  end
+
+  def spotify_title
+    "[#{provider}] #{title}"
   end
 end

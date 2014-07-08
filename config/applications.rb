@@ -13,6 +13,7 @@ require "omniauth-spotify"
 require "omniauth-soundcloud"
 require "omniauth-vkontakte"
 
+require "spotify-client"
 require "soundcloud"
 
 module GoSpotify

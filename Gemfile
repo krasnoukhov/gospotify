@@ -11,6 +11,7 @@ gem "omniauth-spotify", "~> 0.0.1"
 gem "omniauth-soundcloud", "~> 1.0"
 gem "omniauth-vkontakte", "~> 1.3"
 
+gem "spotify-client", "~> 0.0.1"
 gem "soundcloud", "~> 0.3"
 
 group :development do
