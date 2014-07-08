@@ -23,9 +23,9 @@ class VkontakteClient < AbstractClient
 
   def remote_tracks(id)
     tracks = if id == "profile"
-      @api.audio.get
+      @api.audio.get(count: 6_000)
     else
-      @api.audio.get(album_id: id)
+      @api.audio.get(count: 6_000, album_id: id)
     end
 
     tracks.map do |track|
