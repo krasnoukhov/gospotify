@@ -13,7 +13,7 @@ class Syncer
     PlaylistRepository.update(playlist)
 
     total(tracks.count)
-    tracks.each_with_index do |track, idx|
+    tracks.reverse.each_with_index do |track, idx|
       at(idx)
       spotify.ensure_track(playlist, track)
     end
