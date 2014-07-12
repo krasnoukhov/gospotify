@@ -1,21 +1,18 @@
 APP_ENV = ENV["LOTUS_ENV"] || "development"
 
 require "bundler/setup"
-require "tilt/erb"
-require "lotus"
+Bundler.require(:default, APP_ENV)
+
 require "lotus/action/session"
-require "lotus-dynamodb"
-require "oj"
-require "sidekiq"
-require "sidekiq-status"
+require "tilt/erb"
 
-require "omniauth-spotify"
-require "omniauth-soundcloud"
-require "omniauth-vkontakte"
+if ENV["SENTRY_DSN"]
+  require "raven/sidekiq"
 
-require "spotify-client"
-require "soundcloud"
-require "vkontakte_api"
+  Raven.configure do |config|
+    config.current_environment = APP_ENV
+  end
+end
 
 module GoSpotify
   module CommonAction
@@ -67,7 +64,13 @@ module GoSpotify
     # :nocov:
     configure(:test) { GoSpotify::Application.local_dynamo }
     configure(:development) { GoSpotify::Application.local_dynamo }
-    configure(:production) { GoSpotify::Application.remote_dynamo }
+    configure(:production) do
+      Lotus::Controller.configure do
+        handle_exceptions false
+      end
+
+      GoSpotify::Application.remote_dynamo
+    end
 
     def self.local_dynamo
       AWS.config(
@@ -83,6 +86,7 @@ module GoSpotify
       AWS.config(
         access_key_id: ENV["AWS_KEY"],
         secret_access_key: ENV["AWS_SECRET"],
+        dynamo_db_endpoint: "dynamodb.eu-west-1.amazonaws.com",
       )
     end
     # :nocov:

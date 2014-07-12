@@ -1,4 +1,7 @@
 source "https://rubygems.org"
+ruby "2.1.2"
+
+gem "puma", "~> 2.9"
 
 gem "lotusrb", github: "krasnoukhov/lotus"
 gem "lotus-dynamodb", "~> 0.1"
@@ -23,4 +26,9 @@ group :test do
   gem "minitest-capybara", "~> 0.7"
   gem "simplecov", "~> 0.8"
   gem "coveralls", "~> 0.7"
+end
+
+group :production do
+  gem "newrelic_rpm", "~> 3.9"
+  gem "sentry-raven", "~> 0.9"
 end

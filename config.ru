@@ -1,5 +1,6 @@
 require_relative "config/applications"
 
+use Raven::Rack if ENV["SENTRY_DSN"]
 use Rack::Session::Cookie, secret: ENV["SECRET"]
 use OmniAuth::Builder do
   provider :spotify, ENV["SPOTIFY_KEY"], ENV["SPOTIFY_SECRET"], {
