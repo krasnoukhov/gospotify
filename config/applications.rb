@@ -90,7 +90,6 @@ module GoSpotify
 end
 
 APP = GoSpotify::Application.new
-LOGGER = Logger.new("log/#{APP_ENV}.log")
 
 require_relative "mapping"
 require_relative "sidekiq"
