@@ -12,18 +12,25 @@ class Playlist
   end
 
   def status
-    return {
+    return default_status unless job_id
+
+    default_status.merge(
+      Sidekiq::Status::get_all(job_id).map { |k, v| [k.to_s, v] }.to_h
+    )
+  end
+
+  def spotify_title
+    "[#{provider}] #{title}"
+  end
+
+  private
+  def default_status
+    {
       "update_time" => nil,
       "status" => nil,
       "total" => nil,
       "at" => nil,
       "message" => nil
-    } unless job_id
-
-    Sidekiq::Status::get_all(job_id).map { |k, v| [k.to_s, v] }.to_h
-  end
-
-  def spotify_title
-    "[#{provider}] #{title}"
+    }
   end
 end
