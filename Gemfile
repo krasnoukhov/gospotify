@@ -1,6 +1,6 @@
 source "https://rubygems.org"
 
-gem "lotusrb", github: "lotus/lotus"
+gem "lotusrb", github: "krasnoukhov/lotus"
 gem "lotus-dynamodb", "~> 0.1"
 gem "rake", "~> 10.3"
 gem "oj", "~> 2.9"
