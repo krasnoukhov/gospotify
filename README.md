@@ -2,6 +2,8 @@
 
 GoSpotify is a simple service that syncs your playlists from SoundCloud, VK and Last.fm to Spotify.
 
+![gospotify 2014-07-13 19-37-04 2014-07-13 19-39-37](https://cloud.githubusercontent.com/assets/944286/3565170/48203002-0aac-11e4-8c1f-b68994c2200c.jpg)
+
 ## Status
 
 [![Build Status](https://secure.travis-ci.org/krasnoukhov/gospotify.svg?branch=master)](http://travis-ci.org/krasnoukhov/gospotify?branch=master)
