@@ -23,6 +23,17 @@ class Playlist
     "[#{provider}] #{title}"
   end
 
+  def icon
+    case external_id
+    when "profile"
+      "user"
+    when "favorites"
+      "star"
+    else
+      "list"
+    end
+  end
+
   private
   def default_status
     {

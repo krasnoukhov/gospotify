@@ -13,6 +13,7 @@ class PlaylistPresenter
       "job_id"       => @playlist.job_id,
       "synced_at"    => @playlist.synced_at ? @playlist.synced_at.iso8601 : nil,
       "status"       => @playlist.status,
+      "icon"         => @playlist.icon,
     }
   end
 end

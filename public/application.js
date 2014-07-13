@@ -72,7 +72,7 @@ var Provider = React.createClass({displayName: 'Provider',
 
     return (
       React.DOM.div( {className:"provider"}, 
-        React.DOM.h2(null, React.DOM.i( {className:icon}), " ", this.props.name),
+        React.DOM.h2(null, this.props.name, " ", React.DOM.i( {className:icon})),
         content
       )
     )
@@ -148,10 +148,14 @@ var Playlist = React.createClass({displayName: 'Playlist',
       )
     }
 
+    var icon = "fa fa-" + this.props.playlist.icon;
+
     return (
       React.DOM.tr(null, 
         React.DOM.td(null, 
-          React.DOM.h4(null, this.props.playlist.title)
+          React.DOM.h4(null, 
+            React.DOM.small(null, React.DOM.i( {className:icon})), " ", this.props.playlist.title
+          )
         ),
         React.DOM.td( {className:"controls"}, 
           status,

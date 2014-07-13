@@ -10,8 +10,8 @@ class SoundcloudClient < AbstractClient
   private
   def default_playlists
     [
-      { id: "profile", title: "Tracks" },
-      { id: "favorites", title: "Likes" }
+      { id: "profile", title: "Profile tracks" },
+      { id: "favorites", title: "Favorited tracks" }
     ]
   end
 

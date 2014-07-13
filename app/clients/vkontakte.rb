@@ -10,7 +10,7 @@ class VkontakteClient < AbstractClient
   private
   def default_playlists
     [
-      { id: "profile", title: "Tracks" },
+      { id: "profile", title: "Audio" },
     ]
   end
 

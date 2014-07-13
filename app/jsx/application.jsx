@@ -72,7 +72,7 @@ var Provider = React.createClass({
 
     return (
       <div className="provider">
-        <h2><i className={icon}></i> {this.props.name}</h2>
+        <h2>{this.props.name} <i className={icon}></i></h2>
         {content}
       </div>
     )
@@ -148,10 +148,14 @@ var Playlist = React.createClass({
       )
     }
 
+    var icon = "fa fa-" + this.props.playlist.icon;
+
     return (
       <tr>
         <td>
-          <h4>{this.props.playlist.title}</h4>
+          <h4>
+            <small><i className={icon}></i></small> {this.props.playlist.title}
+          </h4>
         </td>
         <td className="controls">
           {status}
