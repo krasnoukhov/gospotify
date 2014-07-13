@@ -2,6 +2,8 @@ class Syncer
   include Sidekiq::Worker
   include Sidekiq::Status::Worker
 
+  sidekiq_options retry: 3
+
   def perform(playlist_id)
     playlist = PlaylistRepository.find(playlist_id)
     client = playlist.auth.client
