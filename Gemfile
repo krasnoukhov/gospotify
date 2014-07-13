@@ -13,10 +13,12 @@ gem "sidekiq-status", github: "krasnoukhov/sidekiq-status"
 gem "omniauth-spotify", "~> 0.0.1"
 gem "omniauth-soundcloud", "~> 1.0"
 gem "omniauth-vkontakte", "~> 1.3"
+gem "omniauth-lastfm", github: "krasnoukhov/omniauth-lastfm"
 
 gem "spotify-client", "~> 0.0.1"
 gem "soundcloud", "~> 0.3"
 gem "vkontakte_api", "~> 1.4"
+gem "lastfm", "~> 1.25"
 
 group :development do
   gem "powify", "~> 0.9"

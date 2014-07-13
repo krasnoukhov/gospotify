@@ -1,4 +1,6 @@
 class AbstractClient
+  TRACKS_LIMIT = 6_000
+
   def initialize(auth)
     @auth = auth
   end

@@ -10,6 +10,7 @@ use OmniAuth::Builder do
   provider :vkontakte, ENV["VK_KEY"], ENV["VK_SECRET"], {
     scope: "audio"
   }
+  provider :lastfm, ENV["LASTFM_KEY"], ENV["LASTFM_SECRET"]
 end
 
 run APP

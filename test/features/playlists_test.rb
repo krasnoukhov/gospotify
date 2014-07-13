@@ -30,7 +30,7 @@ feature "Playlists" do
             @response.map { |x| x["id"] }.uniq.must_equal [nil]
             @response.map { |x| x["user_id"] }.uniq.must_equal [@user.id]
             @response.map { |x| x["provider"] }.uniq.must_equal [provider.to_s]
-            @response.first["external_id"].must_equal "profile"
+            @response.first["external_id"].must_equal @auth.client.send(:default_playlists).first[:id]
             @response.last["title"].must_equal "Mixtapes"
           end
         end

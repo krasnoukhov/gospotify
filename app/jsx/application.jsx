@@ -3,8 +3,9 @@ var App = React.createClass({
   render: function() {
     return (
       <div className="providers">
-        <Provider name="SoundCloud" provider="soundcloud" />
-        <Provider name="VK" provider="vkontakte" />
+        <Provider name="SoundCloud" provider="soundcloud" icon="soundcloud" />
+        <Provider name="VK" provider="vkontakte" icon="vk" />
+        <Provider name="Last.fm" provider="lastfm" icon="music" />
       </div>
     );
   }
@@ -14,6 +15,7 @@ var Provider = React.createClass({
   propTypes: {
     name: React.PropTypes.string.isRequired,
     provider: React.PropTypes.string.isRequired,
+    icon: React.PropTypes.string.isRequired,
   },
 
   getInitialState: function() {
@@ -46,7 +48,7 @@ var Provider = React.createClass({
   },
 
   render: function() {
-    var icon = 'fa fa-' + this.props.name.toLowerCase();
+    var icon = 'fa fa-' + this.props.icon;
     var content;
 
     if (!this.state.loaded) {

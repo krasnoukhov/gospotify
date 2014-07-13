@@ -53,7 +53,7 @@ module GoSpotify
   end
 
   class Application < Lotus::Application
-    PROVIDERS = [:soundcloud, :vkontakte]
+    PROVIDERS = [:soundcloud, :vkontakte, :lastfm]
 
     configure do
       layout :application
