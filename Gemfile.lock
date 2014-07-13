@@ -151,6 +151,7 @@ GEM
     rest-client (1.7.1)
       mime-types (>= 1.16, < 3.0)
       netrc (~> 0.7)
+    retriable (1.4.1)
     sentry-raven (0.9.4)
       faraday (>= 0.7.6)
       hashie (>= 1.1.0)
@@ -212,6 +213,7 @@ DEPENDENCIES
   powify (~> 0.9)
   puma (~> 2.9)
   rake (~> 10.3)
+  retriable (~> 1.4)
   sentry-raven (~> 0.9)
   sidekiq (~> 3.2)
   sidekiq-status!

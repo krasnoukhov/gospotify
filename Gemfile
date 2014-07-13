@@ -9,6 +9,7 @@ gem "rake", "~> 10.3"
 gem "oj", "~> 2.9"
 gem "sidekiq", "~> 3.2"
 gem "sidekiq-status", github: "krasnoukhov/sidekiq-status"
+gem "retriable", "~> 1.4"
 
 gem "omniauth-spotify", "~> 0.0.1"
 gem "omniauth-soundcloud", "~> 1.0"

@@ -30,11 +30,13 @@ class SpotifyClient
       # puts "-"*10
 
       if search_track = search_tracks.first
-        @api.add_user_tracks_to_playlist(
-          @auth.external_id,
-          playlist.spotify_id,
-          [search_track["uri"]]
-        )
+        Retriable.retriable do
+          @api.add_user_tracks_to_playlist(
+            @auth.external_id,
+            playlist.spotify_id,
+            [search_track["uri"]]
+          )
+        end
 
         break
       end
