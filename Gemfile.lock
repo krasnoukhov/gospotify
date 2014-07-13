@@ -10,14 +10,6 @@ GIT
       thor (= 0.19.1)
 
 GIT
-  remote: git://github.com/krasnoukhov/omniauth-lastfm.git
-  revision: 1a7095b1e1e411fc3a8eabcda98a137fac562084
-  specs:
-    omniauth-lastfm (0.0.5)
-      omniauth-oauth (~> 1.0)
-      rest-client (>= 1.6.6, < 1.8)
-
-GIT
   remote: git://github.com/krasnoukhov/sidekiq-status.git
   revision: 10c70c27a9b84d59577ecbee69ad9aadb306d2a9
   specs:
@@ -122,6 +114,9 @@ GEM
     omniauth (1.2.2)
       hashie (>= 1.2, < 4)
       rack (~> 1.0)
+    omniauth-lastfm (0.0.6)
+      omniauth-oauth (~> 1.0)
+      rest-client (>= 1.6.6, < 1.8)
     omniauth-oauth (1.0.1)
       oauth
       omniauth (~> 1.0)
@@ -206,7 +201,7 @@ DEPENDENCIES
   minitest-capybara (~> 0.7)
   newrelic_rpm (~> 3.9)
   oj (~> 2.9)
-  omniauth-lastfm!
+  omniauth-lastfm (~> 0.0.6)
   omniauth-soundcloud (~> 1.0)
   omniauth-spotify (~> 0.0.1)
   omniauth-vkontakte (~> 1.3)
