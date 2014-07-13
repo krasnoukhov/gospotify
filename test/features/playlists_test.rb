@@ -65,6 +65,7 @@ feature "Playlists" do
 
       describe "show" do
         before do
+          page.driver.submit :patch, "/provider/#{provider}/playlists/12345", {}
           visit "/provider/#{provider}/playlists/12345"
           @response = Oj.load(page.body)
         end

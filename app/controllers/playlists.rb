@@ -26,7 +26,7 @@ module GoSpotify::Controllers::Playlists
     include CommonAction
 
     def call(params)
-      playlist = @auth.client.playlists.find { |x| x.external_id == params[:id] }
+      playlist = @auth.client.local_playlists.find { |x| x.external_id == params[:id] }
       halt 401 unless playlist
 
       self.format = :json
