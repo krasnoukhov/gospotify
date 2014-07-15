@@ -1,7 +1,8 @@
-class SpotifyClient
+class SpotifyClient < AbstractClient
   def initialize(auth)
-    @auth = auth
-    @api = Spotify::Client.new(access_token: @auth.token, raise_errors: true)
+    @api = Spotify::Client.new(access_token: auth.token, raise_errors: true)
+
+    super
   end
 
   # :nocov: #
@@ -41,6 +42,12 @@ class SpotifyClient
         break
       end
     end
+  end
+
+  private
+  # TODO
+  def invalidate_token
+    raise NotImplementedError
   end
   # :nocov: #
 end

@@ -8,7 +8,7 @@ use OmniAuth::Builder do
   }
   provider :soundcloud, ENV["SOUNDCLOUD_KEY"], ENV["SOUNDCLOUD_SECRET"]
   provider :vkontakte, ENV["VK_KEY"], ENV["VK_SECRET"], {
-    scope: "audio"
+    scope: "audio offline"
   }
   provider :lastfm, ENV["LASTFM_KEY"], ENV["LASTFM_SECRET"]
 end

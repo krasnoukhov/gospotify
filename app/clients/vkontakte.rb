@@ -1,10 +1,9 @@
 require_relative "abstract"
 
 class VkontakteClient < AbstractClient
-  def initialize(*args)
+  def initialize(auth)
+    @api = VkontakteApi::Client.new(auth.token)
     super
-
-    @api = VkontakteApi::Client.new(@auth.token)
   end
 
   private

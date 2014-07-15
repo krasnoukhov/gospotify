@@ -35,8 +35,20 @@ module GoSpotify::Controllers::Auth
 
       auth.email = omniauth[:info][:email]
       auth.token = omniauth[:credentials][:token]
-      if omniauth[:credentials][:refresh_token]
-        auth.secret = omniauth[:credentials][:refresh_token]
+
+      auth.secret = if omniauth[:credentials][:refresh_token]
+        omniauth[:credentials][:refresh_token]
+      else
+        nil
+      end
+
+      auth.expires_at = if (
+        omniauth[:credentials][:expires_at] &&
+        omniauth[:credentials][:expires_at] > Time.new.to_f
+      )
+        Time.at(omniauth[:credentials][:expires_at])
+      else
+        nil
       end
 
       auth

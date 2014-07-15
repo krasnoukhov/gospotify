@@ -1,10 +1,10 @@
 require_relative "abstract"
 
 class SoundcloudClient < AbstractClient
-  def initialize(*args)
+  def initialize(auth)
+    @api = SoundCloud.new(access_token: auth.token)
+    
     super
-
-    @api = SoundCloud.new(access_token: @auth.token)
   end
 
   private

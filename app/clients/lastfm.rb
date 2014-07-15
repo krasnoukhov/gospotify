@@ -1,11 +1,11 @@
 require_relative "abstract"
 
 class LastfmClient < AbstractClient
-  def initialize(*args)
-    super
-
+  def initialize(auth)
     @api = Lastfm.new(ENV["LASTFM_KEY"], ENV["LASTFM_SECRET"])
-    @api.session = @auth.token
+    @api.session = auth.token
+
+    super
   end
 
   private

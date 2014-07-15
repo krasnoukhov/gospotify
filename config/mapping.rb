@@ -18,6 +18,7 @@ mapper = Lotus::Model::Mapper.new(coercer) do
     attribute :email,          String
     attribute :token,          String
     attribute :secret,         String
+    attribute :expires_at,     Time
   end
 
   collection :playlists do

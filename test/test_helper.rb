@@ -56,6 +56,8 @@ GoSpotify::Application::PROVIDERS.each do |provider|
     },
     credentials: {
       token: "XXX",
-    },
+    }.merge(provider != :soundcloud ? {
+      expires_at: Time.new.to_i + 5*60,
+    } : {}),
   })
 end
