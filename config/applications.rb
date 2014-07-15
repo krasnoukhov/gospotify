@@ -6,6 +6,7 @@ Bundler.require(:default, APP_ENV)
 require "lotus/action/session"
 require "tilt/erb"
 
+# :nocov:
 if ENV["SENTRY_DSN"]
   require "raven/sidekiq"
 
@@ -13,6 +14,7 @@ if ENV["SENTRY_DSN"]
     config.current_environment = APP_ENV
   end
 end
+# :nocov:
 
 module GoSpotify
   module CommonAction
