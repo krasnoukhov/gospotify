@@ -3,7 +3,7 @@ ruby "2.1.2"
 
 gem "puma", "~> 2.9"
 
-gem "lotusrb", github: "krasnoukhov/lotus"
+gem "lotusrb", github: "lotus/lotus"
 gem "lotus-dynamodb", "~> 0.1"
 gem "rake", "~> 10.3"
 gem "oj", "~> 2.9"
