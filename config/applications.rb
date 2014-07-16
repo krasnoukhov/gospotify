@@ -60,6 +60,7 @@ module GoSpotify
     configure do
       layout :application
       load_paths << "app"
+      templates "app/templates"
       routes "config/routes"
     end
 
