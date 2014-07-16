@@ -47,7 +47,6 @@ class SpotifyClient < AbstractClient
   private
   # TODO
   def invalidate_token
-    raise NotImplementedError
   end
   # :nocov: #
 end
