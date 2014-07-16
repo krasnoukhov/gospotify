@@ -1,3 +1,5 @@
+require_relative "abstract"
+
 class SpotifyClient < AbstractClient
   def initialize(auth)
     @api = Spotify::Client.new(access_token: auth.token, raise_errors: true)
