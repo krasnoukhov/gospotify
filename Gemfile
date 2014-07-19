@@ -23,6 +23,7 @@ gem "lastfm", "~> 1.25"
 
 group :development do
   gem "powify", "~> 0.9"
+  gem "mina", "~> 0.3"
 end
 
 group :test do
