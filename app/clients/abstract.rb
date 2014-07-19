@@ -34,6 +34,12 @@ class AbstractClient
     remote_tracks(playlist.external_id)
   end
 
+  # :nocov: #
+  def cleanup
+    raise NotImplementedError
+  end
+  # :nocov: #
+
   private
   def find_playlist(playlists, external_id, &block)
     playlist = playlists.find do |x|

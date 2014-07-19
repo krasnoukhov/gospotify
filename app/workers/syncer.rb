@@ -23,5 +23,7 @@ class Syncer
     playlist.job_id = nil
     playlist.synced_at = Time.new
     PlaylistRepository.update(playlist)
+
+    spotify.cleanup
   end
 end
