@@ -130,7 +130,12 @@ var Playlist = React.createClass({displayName: 'Playlist',
       dataType: "json",
       success: function(data) {
         this.props.playlist = data;
-        this.setState(data.status)
+        this.setState(data.status);
+
+        if (!$.cookie("donate") && this.status() == "sync") {
+          $("#donate").modal();
+          $.cookie("donate", 1, { expires: 30, path: "/" });
+        }
       }.bind(this),
       error: function(xhr, status, err) {
         this.setState({ status: "error" })
