@@ -25,5 +25,6 @@ class Syncer
     PlaylistRepository.update(playlist)
   ensure
     spotify.cleanup if defined?(spotify)
+    GC.start
   end
 end
