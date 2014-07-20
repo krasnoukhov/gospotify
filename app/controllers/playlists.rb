@@ -19,7 +19,9 @@ module GoSpotify::Controllers::Playlists
       self.format = :json
       self.body = Oj.dump(@auth.client.playlists.map { |p| PlaylistPresenter.new(p).to_h })
     rescue *AbstractClient::EXCEPTIONS
+      # :nocov:
       halt 401
+      # :nocov:
     end
   end
 

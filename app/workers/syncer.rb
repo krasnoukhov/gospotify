@@ -2,7 +2,7 @@ class Syncer
   include Sidekiq::Worker
   include Sidekiq::Status::Worker
 
-  sidekiq_options retry: 3
+  sidekiq_options retry: 10
 
   def perform(playlist_id)
     playlist = PlaylistRepository.find(playlist_id)
@@ -17,7 +17,7 @@ class Syncer
     total(tracks.count)
     tracks.reverse.each_with_index do |track, idx|
       at(idx)
-      spotify.ensure_track(playlist, track)
+      spotify.ensure_track(spotify_playlist, track)
     end
 
     playlist.job_id = nil

@@ -6,6 +6,13 @@ GIT
       sidekiq (>= 2.7, < 3.3)
 
 GIT
+  remote: git://github.com/krasnoukhov/spotify-client.git
+  revision: 0614c1178ecf50fe05a660b4d51ce54695301e4e
+  specs:
+    spotify-client (0.0.5)
+      excon (~> 0.37)
+
+GIT
   remote: git://github.com/lotus/lotus.git
   revision: 3b1be6f5d98ae43c8d2baa3317790522bb4a1190
   specs:
@@ -25,7 +32,7 @@ GEM
       minitest (~> 5.1)
       thread_safe (~> 0.1)
       tzinfo (~> 1.1)
-    aws-sdk (1.48.0)
+    aws-sdk (1.48.1)
       json (~> 1.4)
       nokogiri (>= 1.4.4)
     capybara (2.4.1)
@@ -162,7 +169,7 @@ GEM
       json
       redis (>= 3.0.6)
       redis-namespace (>= 1.3.1)
-    simplecov (0.8.2)
+    simplecov (0.9.0)
       docile (~> 1.1.0)
       multi_json
       simplecov-html (~> 0.8.0)
@@ -170,8 +177,6 @@ GEM
     soundcloud (0.3.2)
       hashie (~> 2.0)
       httmultiparty (~> 0.3.0)
-    spotify-client (0.0.5)
-      excon (~> 0.37)
     term-ansicolor (1.3.0)
       tins (~> 1.0)
     thor (0.19.1)
@@ -219,5 +224,5 @@ DEPENDENCIES
   sidekiq-status!
   simplecov (~> 0.8)
   soundcloud (~> 0.3)
-  spotify-client (~> 0.0.1)
+  spotify-client!
   vkontakte_api (~> 1.4)
