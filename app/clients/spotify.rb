@@ -59,6 +59,9 @@ class SpotifyClient < AbstractClient
           )
         end
 
+        spotify_playlist["track_uris"] << search_track["uri"]
+        spotify_playlist["track_uris"].uniq!
+
         break
       end
     end
