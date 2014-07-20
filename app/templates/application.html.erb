@@ -33,9 +33,15 @@
 
     <div class="page-footer">
       <hr />
-      <p>
+      <p class="pull-left">
         <a href="https://github.com/krasnoukhov/gospotify">Open source</a> project by <a href="http://krasnoukhov.com">Dmitry Krasnoukhov</a>
       </p>
+      <div class="pull-right">
+        <div class="pull-right fb-like" data-href="http://www.gospotify.me" data-width="107" data-layout="button_count" data-show-faces="false" data-send="false"></div>
+        <a class="pull-right twitter-share-button" href="https://twitter.com/share" data-url="http://www.gospotify.me" data-caption="GoSpotify is a simple service that syncs your playlists to Spotify"></a>
+        <iframe class="pull-right" src="http://ghbtns.com/github-btn.html?user=krasnoukhov&repo=gospotify&type=watch&count=true" allowtransparency="true" frameborder="0" scrolling="no" style="border:none; overflow:hidden; width:107px; height:20px;"></iframe>
+      </div>
+      <div class="clearfix"></div>
     </div>
   </div>
 
@@ -59,5 +65,24 @@
   <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.7.0/moment.js"></script>
   <% end %>
   <script src="/application.js"></script>
+
+  <script>
+  (function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    js = d.createElement(s);
+    js.src = "//platform.twitter.com/widgets.js";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'twitter-wjs'));
+
+  (function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    js = d.createElement(s);
+    js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=821908237832821";
+    js.onload = function() {
+      FB.XFBML.parse();
+    }
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+  </script>
 </body>
 </html>
