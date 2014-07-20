@@ -3,6 +3,15 @@ class Track
   self.attributes = :artist_title, :title
 
   def queries
-    ["#{artist_title} #{title}", title]
+    ["#{better_artist_title} #{better_title}", better_title]
+  end
+
+  private
+  def better_artist_title
+    artist_title.gsub("ft.", "feat.")
+  end
+
+  def better_title
+    title.gsub("ft.", "feat.")
   end
 end
