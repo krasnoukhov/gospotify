@@ -11,6 +11,16 @@ GoSpotify is a simple service that syncs your playlists from SoundCloud, VK and 
 [![Code Climate](https://img.shields.io/codeclimate/github/krasnoukhov/gospotify.svg)](https://codeclimate.com/github/krasnoukhov/gospotify)
 [![Dependencies](https://gemnasium.com/krasnoukhov/gospotify.svg)](https://gemnasium.com/krasnoukhov/gospotify)
 
+## Stack
+
+GoSpotify is built using awesome technologies:
+
+* [lotus](https://github.com/lotus/lotus), a complete web framework for Ruby
+* [sidekiq](https://github.com/mperham/sidekiq), efficient background processing for Ruby
+
+Data is stored in AWS DynamoDB with [lotus-dynamodb](https://github.com/krasnoukhov/lotus-dynamodb),
+and frontend is built using [Facebook React](http://facebook.github.io/react/).
+
 ## Development
 
 ### Setup
