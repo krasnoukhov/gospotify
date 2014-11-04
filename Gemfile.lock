@@ -103,7 +103,6 @@ GEM
     multi_xml (0.5.5)
     multipart-post (2.0.0)
     netrc (0.7.7)
-    newrelic_rpm (3.9.0.229)
     nokogiri (1.6.3)
       mini_portile (= 0.6.0)
     oauth (0.4.7)
@@ -204,7 +203,6 @@ DEPENDENCIES
   lotusrb!
   mina (~> 0.3)
   minitest-capybara (~> 0.7)
-  newrelic_rpm (~> 3.9)
   oj (~> 2.9)
   omniauth-lastfm (~> 0.0.6)
   omniauth-soundcloud (~> 1.0)
