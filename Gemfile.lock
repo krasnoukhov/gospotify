@@ -150,10 +150,8 @@ GEM
       mime-types (>= 1.16, < 3.0)
       netrc (~> 0.7)
     retriable (1.4.1)
-    sentry-raven (0.9.4)
+    sentry-raven (0.12.2)
       faraday (>= 0.7.6)
-      hashie (>= 1.1.0)
-      uuidtools
     sequel (4.12.0)
     sidekiq (3.2.1)
       celluloid (>= 0.15.2)
@@ -182,7 +180,6 @@ GEM
       thread_safe (~> 0.1)
     url_mount (0.2.1)
       rack
-    uuidtools (2.1.4)
     vkontakte_api (1.4)
       faraday (~> 0.9.0)
       faraday_middleware (~> 0.9.1)
