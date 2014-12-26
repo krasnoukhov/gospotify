@@ -132,7 +132,8 @@ var Playlist = React.createClass({
         this.props.playlist = data;
         this.setState(data.status);
 
-        if (!$.cookie("donate") && this.status() == "sync") {
+        // if (!$.cookie("donate") && this.status() == "sync") {
+        if (this.status() == "sync") {
           $("#donate").modal();
           $.cookie("donate", 1, { expires: 30, path: "/" });
         }
