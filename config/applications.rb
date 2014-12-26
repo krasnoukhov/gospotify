@@ -8,7 +8,7 @@ require "tilt/erb"
 
 # :nocov:
 if ENV["SENTRY_DSN"]
-  require "raven/sidekiq"
+  require "raven/integrations/sidekiq"
 
   Raven.configure do |config|
     config.current_environment = APP_ENV
