@@ -2,10 +2,10 @@
 var App = React.createClass({displayName: 'App',
   render: function() {
     return (
-      React.DOM.div( {className:"providers"}, 
-        Provider( {name:"SoundCloud", provider:"soundcloud", icon:"soundcloud"} ),
-        Provider( {name:"VK", provider:"vkontakte", icon:"vk"} ),
-        Provider( {name:"Last.fm", provider:"lastfm", icon:"music"} )
+      React.DOM.div({className: "providers"}, 
+        Provider({name: "SoundCloud", provider: "soundcloud", icon: "soundcloud"}), 
+        Provider({name: "VK", provider: "vkontakte", icon: "vk"}), 
+        Provider({name: "Last.fm", provider: "lastfm", icon: "lastfm"})
       )
     );
   }
@@ -52,29 +52,29 @@ var Provider = React.createClass({displayName: 'Provider',
     var content;
 
     if (!this.state.loaded) {
-      content = React.DOM.p( {className:"text-muted"}, "Loading...");
+      content = React.DOM.p({className: "text-muted"}, "Loading...");
     } else if (!this.state.authorized) {
       var href = "/auth/"+this.props.provider;
       content = (
-        React.DOM.a( {href:href, className:"btn btn-primary btn-sm"}, 
+        React.DOM.a({href: href, className: "btn btn-primary btn-sm"}, 
           "Sign in with ", this.props.name
         )
       );
     } else if (this.state.playlists.length > 0) {
       content = (
-        React.DOM.table( {className:"table table-hover"}, 
+        React.DOM.table({className: "table table-hover"}, 
           this.state.playlists.map(function(playlist) {
-            return Playlist( {key:playlist.external_id, provider:this.props.provider, playlist:playlist} )
+            return Playlist({key: playlist.external_id, provider: this.props.provider, playlist: playlist})
           }.bind(this))
         )
       )
     } else {
-      content = React.DOM.p( {className:"text-danger"}, "Request error")
+      content = React.DOM.p({className: "text-danger"}, "Request error")
     }
 
     return (
-      React.DOM.div( {className:"provider"}, 
-        React.DOM.h2(null, this.props.name, " ", React.DOM.i( {className:icon})),
+      React.DOM.div({className: "provider"}, 
+        React.DOM.h2(null, this.props.name, " ", React.DOM.i({className: icon})), 
         content
       )
     )
@@ -132,7 +132,8 @@ var Playlist = React.createClass({displayName: 'Playlist',
         this.props.playlist = data;
         this.setState(data.status);
 
-        if (!$.cookie("donate") && this.status() == "sync") {
+        // if (!$.cookie("donate") && this.status() == "sync") {
+        if (this.status() == "sync") {
           $("#donate").modal();
           $.cookie("donate", 1, { expires: 30, path: "/" });
         }
@@ -147,11 +148,11 @@ var Playlist = React.createClass({displayName: 'Playlist',
     var status;
     if (!this.patchDisabled() && this.props.playlist.synced_at) {
       status = (
-        React.DOM.span( {className:"text-muted"}, "Last synced ", moment(this.props.playlist.synced_at).fromNow())
+        React.DOM.span({className: "text-muted"}, "Last synced ", moment(this.props.playlist.synced_at).fromNow())
       )
     } else if (this.state.total && this.state.at) {
       status = (
-        React.DOM.span( {className:"text-success"}, "Processing ", this.state.at,"/",this.state.total)
+        React.DOM.span({className: "text-success"}, "Processing ", this.state.at, "/", this.state.total)
       )
     }
 
@@ -161,12 +162,12 @@ var Playlist = React.createClass({displayName: 'Playlist',
       React.DOM.tr(null, 
         React.DOM.td(null, 
           React.DOM.h4(null, 
-            React.DOM.small(null, React.DOM.i( {className:icon})), " ", this.props.playlist.title
+            React.DOM.small(null, React.DOM.i({className: icon})), " ", this.props.playlist.title
           )
-        ),
-        React.DOM.td( {className:"controls"}, 
-          status,
-          React.DOM.button( {className:"btn btn-success btn-xs", disabled:this.patchDisabled(), onClick:this.requestPatch}, this.status())
+        ), 
+        React.DOM.td({className: "controls"}, 
+          status, 
+          React.DOM.button({className: "btn btn-success btn-xs", disabled: this.patchDisabled(), onClick: this.requestPatch}, this.status())
         )
       )
     )
@@ -175,5 +176,5 @@ var Playlist = React.createClass({displayName: 'Playlist',
 
 var root = document.getElementById('app');
 if (root) {
-  React.renderComponent(App(null ), root);
+  React.renderComponent(App(null), root);
 }

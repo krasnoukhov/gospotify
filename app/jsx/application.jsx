@@ -5,7 +5,7 @@ var App = React.createClass({
       <div className="providers">
         <Provider name="SoundCloud" provider="soundcloud" icon="soundcloud" />
         <Provider name="VK" provider="vkontakte" icon="vk" />
-        <Provider name="Last.fm" provider="lastfm" icon="music" />
+        <Provider name="Last.fm" provider="lastfm" icon="lastfm" />
       </div>
     );
   }
