@@ -11,6 +11,8 @@ GoSpotify is a simple service that syncs your playlists from SoundCloud, VK and 
 [![Code Climate](https://img.shields.io/codeclimate/github/krasnoukhov/gospotify.svg)](https://codeclimate.com/github/krasnoukhov/gospotify)
 [![Dependencies](https://gemnasium.com/krasnoukhov/gospotify.svg)](https://gemnasium.com/krasnoukhov/gospotify)
 
+**Warning**: this project is not maintained anymore. 
+
 ## Stack
 
 GoSpotify is built using awesome technologies:
