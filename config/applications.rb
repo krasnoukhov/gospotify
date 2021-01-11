@@ -23,6 +23,8 @@ module GoSpotify
         include Lotus::Action
         include Lotus::Action::Session
 
+        accept :html
+
         expose :env
         def env
           APP_ENV
